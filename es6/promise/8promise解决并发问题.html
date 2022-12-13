@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * 需求，
+         * 我需要在页面展示一句话：你好 我是 谁
+         * 1：你好  由接口一响应
+         * 2：我是  有接口二响应
+         * 3：谁    接口三响应
+         * 
+         *解决方式： 发送三个请求，三个都成功后，进行字符串拼接。
+         * 
+         * 对于三个请求，我们怎么知道，三个都成功了。
+         * Promise.all()
+         * 浏览器能否支持我同事发送三个请求呢？（浏览器支持最大请求个数是多少个？）
+         *   浏览器可以同时发送多个请求，并发
+         *   不同的浏览器支持的个数不同，3 ，4  6， 8；
+         *   为了避免丢包，最安全的数字 3，4
+         */
+        
+         let p1 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     resolve('你好')
+                 }, 1000);
+             })
+         }
+
+         let p2 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     resolve('我是')
+                    // rejct() //展开这个证明，Promise.all().then的执行特点
+                 }, 1001);
+             })
+         }
+         let p3 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     resolve('谁')
+                 }, 500);
+             })
+         }
+
+
+         /***
+          * Promise.all() 
+          * 作用：触发多个promise实例对象，
+          * 参数：由promise组成的集合
+          * 返回值:promise实例
+          * 当，参数中所有的primise实例都变为 已完成，那么 返回的promise也变为已完成。
+          * then 的参数在所有的promise实例都是已完成时候执行，
+          *   回参：实例的结果集合。
+          * 
+          */
+        //  Promise.all([p1(),p2(),p3()]).then(res=>{
+        //      console.log(res);
+        //      let str = res.reduce((pre,current)=>{
+        //          return pre+current
+        //      },'')
+        //      console.log(str);
+        //      document.write(str)
+        //  }).catch(err=>{
+        //      console.log('并发的多个任务中有一个失败了');
+        //  })
+
+        
+        // -------Promise.all结合async await---------
+        // async function foo(){
+        //     let res = await Promise.all([p1(),p2(),p3()]);
+        //      console.log(res);
+        // }
+        // foo()
+    </script>
+    <!-- 
+        注意：
+        浏览器中并发指的是什么？
+        浏览器中并行指的是什么？
+     -->
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* raw 可以将转移字符都可以转义的方法 */
+       let str = String.raw`Hi\n${2+3}!`
+       console.log(str);
+       console.log(String.raw({ raw: ['foo', 'bar'] }, 1 + 2) // "foo3bar"
+        );
+
+        /**
+         * repeat()
+         * 作用：设置一个字符串从夫的次数，并返回结果
+         * 
+         */
+        let str1 = 'abc'.repeat(3);
+        console.log(str1);
+
+        // 手写repeat
+        function repeat(str,num){
+            let res = '';
+            for(let i = 0;i<num;i++){
+                res +=str 
+            }
+            return res
+        }
+
+        console.log(repeat('abc',3));
+
+        // es6中字符串新增了哪些api
+        // repeat replaceAll matchAll 等
+    </script>
+</body>
+</html>

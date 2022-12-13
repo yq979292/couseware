@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建set数据结构
+        // 注意的是：Set结构中；属性和值 是一样的
+        let values = new Set(['aaa','nnbbb','ccc',1,1]);
+        console.log(values);
+        for(let val of values){
+            console.log(val);
+        }
+
+        for(let k of values.keys()){
+            console.log(k);
+        }
+
+        for(let k of values.values()){
+            console.log(k);
+        }
+
+
+        for(let k of values.entries()){
+            console.log(k);
+        }
+
+        // 创建map结构的数据
+        let vals = new Map([
+            ['key1','value1'],
+            ['key2','value2']
+        ])
+
+        for(let k of vals){
+            console.log(k);
+        }
+
+
+        for(let [key,value] of vals){
+            console.log(key,value);
+        }
+    </script>
+</body>
+</html>

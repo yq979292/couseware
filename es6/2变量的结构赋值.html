@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            a:123,
+            b:456,
+        }
+
+        // let a = obj.a;
+        // let b = obj.b
+
+        /**
+         * 解构对象：
+         * 1：用{} 
+         * 2: 变量的名字与对象中的key保持一致
+         * 
+         */ 
+        // 声明a b 变量并进行赋值
+        let { a,b } = obj;
+
+        let arr = [2,3,4,function(){}];
+        /**
+         * 解构数组：
+         * 1：用 []
+         * 2: 变量名字自定义
+         */ 
+        let [c,d,r,foo] = arr;
+        // console.log(c,d,r,foo);
+
+        // 可以在函数形参位置上，直接解构赋值
+        function bar({url},a){
+            console.log(url);
+            console.log(a);
+        }
+
+        bar({
+            url:'fds'
+        },12)
+    </script>
+</body>
+</html>

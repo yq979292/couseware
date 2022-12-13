@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 手写ajax简单版
+        function ajax(options) {
+            let {
+                method,
+                url,
+                data,
+                success
+            } = options;
+            let xhr = new XMLHttpRequest();
+            method = method.toLocaleUpperCase();
+            let query = '';
+            for (let k in data) {
+                query = query + k + '=' + data[k] + "&"
+            }
+            query = query.slice(0, query.length - 1)
+            if (method === 'GET') {
+                xhr.open(method, url + "?" + query, true);
+                xhr.send();
+            }
+            if (method === 'POST') {
+                xhr.open(method, url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                xhr.send(query);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let result = xhr.responseText;
+                    result = JSON.parse(result)
+                    xhr.data = result
+                    success(xhr)
+                }
+            }
+        }
+
+        // ajax({
+        //     url:"http://localhost:3000/gettest",
+        //     method:'get',
+        //     data:{
+        //         page:1,
+        //     },
+        //     success({data}){
+        //         console.log(data);
+        //     },
+        //     error(err){
+        //         console.log(err);
+        //     }
+        // })
+
+
+        function Axios(options) {
+            return new Promise((resolve, reject) => {
+                let {
+                    url,
+                    method,
+                    data
+                } = options;
+                let xhr = new XMLHttpRequest();
+                method = method.toLocaleUpperCase();
+                let query = '';
+                for (let k in data) {
+                    query = query + k + '=' + data[k] + "&"
+                }
+                query = query.slice(0, query.length - 1)
+                if (method === 'GET') {
+                    // xhr.open('GET',’http://localhost:3000/gettest',true)
+                    xhr.open(method, url + "?" + query, true);
+                    xhr.send();
+                }
+                if (method === 'POST') {
+                    xhr.open(method, url, true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                    xhr.send(query);
+                }
+                // onreadystatechange 触发条件 xhr.readyState
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        let result = xhr.responseText;
+                        result = JSON.parse(result)
+                        xhr.data = result;
+                        resolve(xhr)
+                    }
+                }
+            })
+        }
+
+        let p = Axios({
+            url: "http://localhost:3000/gettest",
+            method: 'get',
+            data: {
+                page: 1,
+                test: "123"
+            },
+        }).then(res => {
+            console.log(res.data); // 获取的服务器响应的数据，
+        })
+    </script>
+
+</body>
+
+</html>

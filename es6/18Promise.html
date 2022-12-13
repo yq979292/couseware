@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise 构造函数
+        // console.log(Promise);
+
+        console.log(1);
+        /**
+         * Promise中：
+         * 同步：
+         * 1：Promise实例对象是同步的，执行快的
+         * 2：Promise的参数，是同步的，执行快
+         * 异步的：
+         * then的回调
+         */ 
+
+         /**
+          * Promise()
+          * 作用：创建promise实例对象
+          * 参数：回到函数
+          *   回参一： 函数 作用是什么》？
+          *   回参二： 函数 作用是什么？
+          */ 
+        let p = new Promise((resole,reject)=>{
+            // 在 new Promise() 回调函数同步执行
+            console.log('resolove run');
+            console.log(2);
+            console.log(resole,reject);
+        })
+       
+        console.log(3);
+    
+    </script>
+    <script>
+        /***
+         * 常见的回调函数的异步有哪些：
+         * 1：setTimeOut 的回调
+         * 2：setInterval 的回到
+         * 3：网络请求的，函数
+         * 4：
+         */ 
+        // console.log(1)
+        // setTimeout(() => {
+            // console.log(2);
+        // }, 0);
+
+        // function foo(cb){
+        //     cb()
+        // }
+
+        /**注意：不是所有的回到函数都是异步的。*/
+        // foo(()=>{
+        //     console.log(2);
+        // })
+        // console.log(3);
+    </script>
+</body>
+</html>

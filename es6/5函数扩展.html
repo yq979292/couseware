@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 以下为语法的变更
+        // let foo = (a,b)=>{
+        //     console.log('foo run ');
+        //     return 1
+        // }
+
+        // let bar = a=>{
+        //     return 1
+        // }
+        // // 上面代码简写
+        // let bar1 = a=>1;
+
+        // let bar2 = a=>{
+        //     return {a:'123'}
+        // }
+        // let bar3 = a=>({a:"123"})
+
+        // ------------------end--------------
+
+
+        // 形参数值默认值
+        function foo(option={a:'123'},b){
+            console.log(option);
+        }
+        foo({
+            b:'1111'
+        })
+
+        // -----箭头函数--------
+
+        let  func = ()=>{
+            // console.log(arguments); // 箭头函数没有arguments
+            // console.log(this); // 没有this,使用距离他最近的，具有this的作用域中的this.
+        }
+        let obj = {a:func}
+        func()
+        obj.a()
+
+        // ---------end-------------
+
+        // --------rest------------
+
+        let fun = (...rest)=>{
+            // 箭头函数虽然没有arguments，但是可以用rest参数代替arguments 获取所有的实参
+            console.log(rest);
+        }
+
+        fun(1,2,3,3)
+
+        function bar(...rest){
+            console.log(rest);
+        }
+
+        bar(1,2,2,2,3)
+
+        // name 返回函数名字
+        console.log(bar.name);
+    </script>
+    <script>
+        try{
+
+        }catch(err){
+            // err 捕获 try中抛出的错误信息
+        }
+
+        try{}catch{} // es9新增的
+
+        // 面试题：说一下es6箭头函数；有哪些内容？函数新增了哪些内容？
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // // for 的起源
+        // let colors = ['red','green','yellow'];
+        // for(let i =0,len=colors.length;i<len;i++){
+        //     // 只读取内存一次length
+        //     console.log(colors[i]);
+        // }
+
+        // for(let i =0;i<colors.length;i++){
+        //     // 表达式二:重复执行对此，对此去内存中读取length赋值
+        // }
+
+        // // function unique(arr){
+        // //     // 思路新数组中保证为不重复的数据
+        // //     let res = [];
+        // //     let flag = false; // 表示res中是否存在 arr中的某个元素；默认不存在
+        // //     for(var i =0;i<arr.length;i++){
+        // //         for(var j = 0;j<res.length;j++){
+        // //             if(arr[i]===res[j]){
+        // //                 flag = true;
+        // //                 break;
+        // //             }else {
+        // //                 flag = false
+        // //             }
+        // //         }
+        // //         if(!flag){
+        // //             res.push(arr[i])
+        // //         }
+        // //     }
+        // //     return res
+        // // }
+
+        // function unique(arr){
+        //     // 思路新数组中保证为不重复的数据
+        //     let res = [];
+        //     for(var i =0;i<arr.length;i++){
+        //         for(var j = 0;j<res.length;j++){
+        //             if(arr[i]===res[j]){
+        //                 break; // j !== res.length;
+        //             }
+        //         }
+        //         if(j===res.length){
+        //             res.push(arr[i])
+        //         }
+               
+        //     }
+        //     return res
+        // }
+
+        // 为什么会产生迭代器和for...of:
+        // 传统for复杂度高，为了降低复杂度，es6中出了 迭代器和for...of,解决了复杂度问题
+        // 复杂的for循环容易丢失一次，或者一次等问题。
+    </script>
+    <script>
+        //我们用es5模拟一下迭代器
+
+        function createIterator(items){
+            var i = 0;
+            return {
+                next(){
+                    var done = i>=items.length;// 循环是否结束；true 已经遍历结束 false没有遍历结束
+                    var value = !done ? items[i++] :undefined; // 当前值 遍历执行，
+
+                    return {
+                        value,
+                        done
+                    }
+                }
+            }
+        }
+
+        //  iterotor 就是模拟产生的迭代器
+        let iterotor = createIterator([2,3,4,5,1]);
+        console.log(iterotor.next());
+        console.log(iterotor.next());
+        console.log(iterotor.next());
+        console.log(iterotor.next());
+        console.log(iterotor.next());
+        console.log(iterotor.next());
+
+        // ----------------
+
+        // for(let value of iterotor ){
+        //     console.log(value);
+        // }
+        // 报错 iterotor is not iterable
+
+
+        // 那什么内容才能用for...of 遍历呢？？？？
+        // 其实就是一个数据结构，只要部署了Iterator接口；我们就可以遍历
+
+        // 什么是具有Iterator接口的数据
+
+        // es6中规定，默认的Iterator接口部署在数据结构啊 Symbol.Iterator属性上。
+
+        // let obj = {
+        //     value:1,
+        // }
+        // for(value of obj){
+        //     console.log(value);
+        // }
+
+        // 报错 obj is not iterable
+
+        let obj = {
+            value:1,
+        }
+
+        obj[Symbol.iterator] = function(){
+            // 在for...of 遍历 Symbol.iterator属性时候执行；
+            console.log('symnol iterator');
+            return createIterator([2,3,4,5])
+        }
+
+        console.log(obj);
+
+        // obj 上的 Symbol.iterator 属性被遍历了。
+        for(value of obj){
+            console.log(value);
+        }
+
+        console.log('------------------分解-----------------');
+        let arr = [3,4,5,5];
+        for(let val of arr){
+            console.log(val);
+        }
+
+        // 数据也可以使用for...of 遍历 为什么呢？？
+        // 因为es6默认部署了Symbol.iterator属性。当然这个值也可以被我们修改
+
+        arr[Symbol.iterator] = function(){
+            return createIterator(['red','green','yellow'])
+        }
+
+        for(let val of arr){
+            console.log(val);
+        }
+
+
+        /***
+         * 因为es6默认给很多内容都部署了Symbol.iterator属性；
+         * 所以for...of 开可以遍历哪些？
+         * 数组
+         * Set
+         * Map
+         * 类数组对象 arguments NodeList
+         * 字符串
+         * ...
+         * 
+         */
+
+        /**
+         *  如果你希望你的对象可以使用for...of遍历，你需要怎么做才能实现呢？
+         *  总结：
+         *  1：检查改对象，es6是否默认部署了Symbol.iterator属性
+         *  2：没有部署，手动部署Symbol.iterator属性，并赋值函数，函数返回值为Iterator（迭代器）
+         *  3：迭代器可以自己手动创建，封装一个创建迭代器的函数。在Symbol.iterator中执行即可。
+         *  这个时候，for...of 就会遍历 对象中 Symbol.iterator中的内容。 
+         *   也就是迭代器传入的实参（数组）
+         */
+        
+         
+    </script>
+</body>
+</html>

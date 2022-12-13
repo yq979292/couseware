@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 创建symbol类型数据 
+        let s  = Symbol();
+        console.log(s);
+        console.log(typeof s); // symbol
+
+        // 2：symbol 是原始值不是对象。所以不能使用new创建
+        // bug Uncaught TypeError: Symbol is not a constructor
+        // let a = new Symbol()
+
+        // 3: instanceof 返回 false 
+        // why: 因为symbol 是一个原始值没有原型，instanceof 是通过比较原型对象的方式验证数据类型
+        // so： symbol类型不能通过Instanceof判断
+        console.log(s instanceof Symbol); // false
+
+
+        // 4: Symbol可以接收一个字符串，主要用于与字符串的区分
+        let s1 = Symbol("foo");
+        console.log(s1);
+
+        // 5:Symbol 可以接受一个对象，对象必须要有toString.
+        // Symbol 内部会调用对象下的toString 将其转为字符串，生成symbol值
+        let s2 = Symbol({
+            toString(){
+                return 'abc'
+            }
+        })
+        console.log(s2);
+
+        // 6：Symbol只是表示当前一个symbol值，及时相同的参数返回不同symbol类型
+        //    symbbol 类型具有唯一性
+        let s3 = Symbol('foo');
+        let s4 = Symbol('foo');
+        console.log(s3,s4);
+        console.log(s3===s4);
+
+        // 7：symbol 不能与其他类型运算，报错
+        // console.log(s3+1); // Uncaught TypeError: Cannot convert a Symbol value to a number
+
+        // 8:symol值可以显示转化为字符串
+        console.log(String(s3));
+        console.log(s3.toString());
+
+        // 9：symbol值的作用：
+        //   做对象的属性名，可以保证不会重名
+
+        let obj = {};
+        let a= Symbol('a');
+        let b= Symbol('a');
+        obj[a]= 'syambol a '
+        obj[b]= 232132;
+        console.log(obj);
+
+        // 10:当symbol作为对象下属性时候
+        //  不能通过 for...in  for...of  Object.keys() 。。。等方式读取symbol属性
+        //  只能通过getOwnPropertySymbols() 获取对象下所有symbol属性
+        let objSymbols = Object.getOwnPropertySymbols(obj);
+        console.log(objSymbols);
+
+        // for 不执行
+        // for(let ke in obj){
+        //     console.log(ke);
+        // }
+
+        // 11:可以使用Symbol.for() 创建同意symbol值
+        let s5 = Symbol.for('bar');
+        let s6 = Symbol.for('bar');
+        console.log(s5===s6);
+
+        // 12 Symbol.keyFor() 返回一个已经登记的symbol值
+        console.log(Symbol.keyFor(s5)); // 'bar'
+        console.log(Symbol.keyFor(s6));
+
+
+        /***
+         * 谈谈你对es6中symbol类型的认识
+         *  
+         * es6中新增哪些数据类型，有什么特点，你会怎么使用他？
+         * 
+         */ 
+
+    </script>
+</body>
+</html>

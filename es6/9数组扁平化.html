@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * flat()
+         * 作用：数组扁平化，
+         * 注意：只能扁平化一层
+         */ 
+        let arr = [1, 2, [3, 4,[5,6]]].flat();
+        console.log(arr);
+        
+
+        // 递归数组扁平化。
+        function flatten(arr){
+            let res = [];
+            for(let i =0;i<arr.length;i++){
+                if(Array.isArray(arr[i])){
+                   res = res.concat(flatten(arr[i]))
+                //  如何把flatten() 返回的数组中每一项元素；添加到res数组中
+                //  数组合并：
+                //    console.log( flatten(arr[i]),'--------');
+                }else{
+                    res.push(arr[i])
+                }
+            }
+            return res
+        }
+        let arr1 = [1,2,[3,4],[5,6,[7,8]]]
+        let res = flatten(arr1);
+        console.log(res);
+        console.log(arr1.toString().split(',').map(item=>Number(item)));
+
+        // 方式二：使用toString 实现扁平化
+        // function flattenString(arr){
+        //     return arr.toString().split(',').map(item=>Number(item))
+        // }
+
+        // 方式三 reduce
+
+        // let res1 = arr.reduce((pre,current)=>{
+        //     console.log(pre);
+        //     console.log(current);
+        //     return pre.concat(current)
+        // },[])
+        // console.log(res1);
+
+        function reduce_flatten(arr){
+
+            return arr.reduce((pre,current)=>{
+                console.log(current);
+                return pre.concat(Array.isArray(current)?reduce_flatten(current):current)
+            },[])
+        }
+        let res2 = reduce_flatten(arr1)
+        console.log(res2);
+
+        
+    </script>
+</body>
+</html>

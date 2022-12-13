@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            // 作用一：修改promise实例状态
+            // 作用二：触发then的回调函数
+            resolve(123);
+        })
+        console.log(p);
+
+        // // then的返回值也是，promise实例
+        // let p1 = p.then((res)=>{
+        //     // 形参作用：获取PromiseResult的值，换句话获取 resolve() 的实参
+        //     // res 的赋值是 [[PromisResult]] 的值
+        //     console.log(res);
+        //     // return 作用：给promise实例对象中[[PromiseResult]]属性赋值。
+        //     return 'test'
+        // })
+
+        // console.log(p1);
+        // let p2 = p1.then(res=>{
+        //     console.log(res);
+        // })
+
+
+        // 支持链式调用
+        // p.then(res=>'test').then(res=>{
+        //     console.log(res);
+        // })
+
+        // catch 
+
+        // p.then(res=>{
+        //     console.log(1);
+        // }).then(res=>{
+        //     console.log(2);
+        //     throw new Error('error 自定义') // 证明 中断下面then
+        // }).then(()=>{
+        //     console.log(3);
+        // }).catch(err=>{
+        //     // .then的链式调用中，如果偶一个出现问题，下面会中断
+        //     // 捕获then链式调用中，错误
+        //     console.log('catch run');
+        //     console.log(err);
+        // }).finally(res=>{
+        //     console.log('finally');
+        // })
+        // .then(res=>{
+        //     console.log('可以执行');
+        // })
+        /**
+         * promise 原型方法有 then cathc finally
+         * 1:用then 处理完成状态
+         * 2：catch 处理已拒绝状态
+         * 3：finally 最后执行
+         * 注意：原型方法中的回调函数都是异步执行的
+         *      Promise的回到函数是同步执行的。
+         */
+
+
+        //  ---------then的第二个参数-----------
+        // p.then(res=>{
+        //     console.log(1);
+        // }).then(res=>{
+        //     console.log(2);
+        //     // 这了的拒绝状态应该在下一个then的 第二个参数中捕获。
+        //     throw new Error('error 自定义') // 证明 中断下面then
+        // }).then(()=>{
+        //     console.log(3);
+        // },err=>{
+        //     console.log('then 的第二个参数');
+        //     console.log(err);
+        // })
+
+
+        // ----------try..catch-----------
+
+        // try {
+        //     p.then(res => {
+        //         console.log(1);
+        //     }).then(res => {
+        //         console.log(2);
+        //         throw new Error('error 自定义')
+        //     }).then(() => {
+        //         console.log(3);
+        //     })
+        // } catch (err) {
+        //     // 在浏览器控制题啊可以直接抛出错误信息
+        //     console.log(err);
+        // }
+    </script>
+</body>
+
+</html>

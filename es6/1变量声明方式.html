@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // console.log(a);
+        // // console.log(test); /*在当前作用域，在声明变量之前，该变量会产生暂时性死区*/
+        // let test = '123';
+        // // const 声音的是常量，赋值不能修改。
+        // const foo = '常量';
+        // var a = 123;
+        // // foo = 123 
+
+        // // bug3：变量名字不能重复
+        // // let test = 'dfa'
+
+
+        {
+            let a = '只能在代码块内部方式'
+            console.log(a);
+        }
+        // console.log(a); // bug 证明let声明的变量为，访问权限为代码块内部
+    </script>
+    <script>
+        // 为什么需要块级作用域
+        // var tmp = new Date();
+
+        // function f() {
+        //     console.log(tmp);
+        //     if (false) {
+        //         var tmp = 'hello world';
+        //     }
+        // }
+
+        // f(); // undefined
+
+        // 为了规避开发中一些问题。上述内容 如果是块及作用域；就一定会有输出结果
+    </script>
+</body>
+
+</html>

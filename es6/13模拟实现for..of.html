@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实现思路：通过Symbol.iterator属性获取迭代器，然后遍历迭代器
+
+        /**
+         * 模拟forof()
+         * obj 为被遍历的对象
+         * cb 模拟for中的方法体
+         * 
+         */ 
+        function forOf(obj,cb){
+            // 初始化迭代器。遍历结果
+            let iterator,result;
+            // 1：读取对象下的Symbol.iterator，只有当Symbol.iterator 为一个函数时候；才是 iterabl
+            if(typeof obj[Symbol.iterator] !=='function'){
+                throw new Error(result +' is not iterable');
+            }
+            // 验证cb为函数，为了将循环传入到迭代器内部
+            if(typeof cb!=='function'){
+                throw new Error('cb must be callable')
+            }
+
+            // 通过Symbol.iterator属性获取迭代器
+            iterator = obj[Symbol.iterator]();
+            // 初始化遍历； 遍历迭代器，获取遍历遍历结果，赋值result
+            result = iterator.next();
+            //  redult.done 表示是否结束循环 true 结束 false没结束；
+            while(!result.done){ 
+                cb(result.value) // 输出遍历结果单钱值
+                result = iterator.next() // 循环多次遍历
+            }            
+        }
+
+        
+    </script>
+</body>
+</html>

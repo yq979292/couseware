@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const map = new WeakMap()
+        console.log(map);
+        // map.set(1,2)
+        // bug: Invalid value used as weak map key
+        // map.set(null, 2)
+        // bug Uncaught TypeError: Invalid value used as weak map key
+
+        // weakMap的key究竟是什么类型的数据呢？？
+        // ---> 对象
+        let key = {foo:1};
+        map.set(key,2)
+        let k = map.get(key);
+        console.log(k);
+        // weekMap 为了解决，在保存对象时候，释放内存过于麻烦，的问题
+        // 因为weekMap是弱引用，只要不适用weekMap 就会自动释放空间
+    </script>
+</body>
+
+</html>

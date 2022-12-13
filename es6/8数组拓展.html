@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * 新增静态api
+         *  from  of
+         * 新增了实例api
+         * 
+         */ 
+
+         function foo(){
+             console.log(arguments);
+             /**
+              * Array.fromo() 
+              * 将类数组变为数组
+             */
+             let args= Array.from(arguments)
+             console.log(args);
+
+             /**
+              * Array.of()
+              * 将一堆参数；放到数组中，返回数组集合
+              */ 
+             let arr = Array.of(2,3,3,3)
+             console.log(arr);
+         }
+
+         foo(1,2,2,2)
+
+         /**
+          * copyWithin()
+          * 数据内部的处理，将某个位置元素复制到某个位置上
+          * 
+          */ 
+         let res = [1,2,3,4,5].copyWithin(0,3);
+         console.log(res);
+
+         /**
+          * find(fn)
+          * 作用：条件查询，返回满足条件的第一个数组元素，没有返回undefined
+          */ 
+         let res2 = [1,2,3,4,5].find(item=>{
+             console.log(item);
+             return item === 4
+         })
+         console.log(res2);
+
+        //  手写find
+         function find(arr,cb){
+             let res ;
+             for(let i in arr){
+               let flag = cb(arr[i],i);
+               if(flag){
+                   res = arr[i]
+                   break;
+               }
+             }
+             return res;
+         }
+
+         find([1,2,3,4],function(item){
+             console.log('cb run');
+             return item ===3;
+         })
+
+         /***
+          * findIndex()
+          * 返回满足条件的元素所在的索引,
+          *   -1 表示不存在改元素
+          */ 
+         let i = ['aa','bb'].findIndex(item=>item=='cc');
+         console.log(i);
+
+         function findIndex(arr,cb){
+            let index = -1;
+            for(let i in arr){
+                let flag = cb(arr[i],i);
+                if(flag){
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+         }
+         findIndex(['aa','bb'],function(item,i){
+             console.log('cb run');
+             return item =='cc'
+         });
+
+
+         // fill() 填充数组 了解即可
+         let arr1 = ['a', 'b', 'c'].fill(7)
+         console.log(arr1);
+
+         let arr2 =  ['a','b','c']
+         console.log(arr2.keys()); // Iterator结构 需要用 for...of遍历
+
+         for(let i of arr2.keys()){
+             console.log(i);
+         }
+         console.log(arr2.values());
+
+         for(let i of arr2.values()){
+             console.log(i);
+         }
+
+         console.log(arr2.entries());
+         for(let i of arr2.entries()){
+             console.log(i);
+         }
+
+         /**
+          * 
+          * 检查数组中是否存在某个元素有什么方式？
+          * 1：include() boolean
+          * 2: indexOf() -1
+          * 4: findIndex  -1 
+          * 5: findlastIndex()
+          * 
+          * 查询数组中满足条件某个元素
+          * 
+          * find()
+          * findLast()
+          * 
+          * 查询数组某个位置元素
+          * 1：[] 索引
+          * 2：at() 
+          * 
+          */ 
+
+          console.log(['11','22','33'].at(1)); // 查询索引为1的元素
+          console.log(['11','22','33'].at(-1));/* 查询倒数第一位的元素 */
+
+
+          
+    </script>
+</body>
+</html>

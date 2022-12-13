@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+         let p1 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     console.log('1s run');
+                     resolve('你好')
+                 }, 1000);
+             })
+         }
+
+         let p2 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     console.log('2srun');
+                    //  resolve('我是')
+                    rejct() 
+                 }, 2001);
+             })
+         }
+         let p3 = function(){
+             return new Promise((resolve,rejct)=>{
+                 setTimeout(() => {
+                     console.log('0.5s run');
+                    //  resolve('谁')
+                    reject()
+                 }, 500);
+             })
+         }
+
+
+         /***
+          * Promise.race(arr)
+          * 作用：在多个异步任务中，只要有一个变为已完成，可以触发then
+          * 参数：promise实例集合
+          * 返回值：promise实例
+          *  注意：多个promise中只要有一个变为已完成。返回值的promise也是已完成
+          */ 
+         Promise.race([p1(),p2(),p3()]).then(res=>{
+            //  res 接受的第一个改变为 已完成状态的结果
+             console.log('监听第一个变为已完成状态的结果',res);
+         })
+    </script>
+
+</body>
+</html>

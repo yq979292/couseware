@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        // // Set 本身就是构造函数；
+        // let set = new Set([1,2,2,2]);
+        // console.log(set);
+
+        // let s = new Set(new Set([2,3,3,4]))
+        // console.log(s);
+        // let n = new Set(document.querySelectorAll('div'));
+        // console.log(n);
+
+        // // ----------API---------
+        // let a = new Set();
+        // /**
+        //  * add() 给set新增字段。返回实例本身
+        //  */ 
+        // a.add(1).add('2').add('ddd')
+        // console.log(a);
+        // /**
+        //  * delet() 作用 删除某一个元素。返回 boolean 
+        //  * 参数：被删除的元素
+        //  * true: 删除了袁术
+        //  * false:元素不存在
+        //  */
+        // let res = a.delete('3');
+        // console.log(res);
+        // // has() 验证某个元素是否存在 true 存在 false 不存在
+        // console.log(a.has('ddd'));
+
+
+        // // -----------遍历方法-------------
+        // // keys() values() entries() foreach();
+
+        // let ss = new Set([2,3,3,3]);
+        // console.log(ss.keys());
+        // console.log([...ss.keys()]);
+
+        // ss.forEach((item,index)=>{
+        //     console.log(item,index);
+        // })
+
+
+        // ------------模拟Set-----------
+        // 等一下；有嗲事情
+        (function(global){
+            function Set(data){
+                console.log('set run');
+                this.size = 0;
+                this._value = [];
+                data && data.forEach(item=>{
+                    this.add(item)
+                })
+            }
+            // add 不重复添加
+            Set.prototype['add'] = function(data){
+                console.log('add run');
+                if(this._value.indexOf(data)===-1){
+                    this._value.push(data);
+                    ++this.size
+                }
+                return this
+            }
+
+            // 结论：所有原型api中function中this 都是实例对象
+            Set.prototype['delet'] = function(data){
+                console.log('delet run');
+                // 1:这里怎么获取 实例对象上的 _value值
+                // this._value
+                // 2:怎么将_value中内容删除？
+                // this._value.pop()/shift()/split。。
+                // 3：怎么验证data是否在_value中存在？
+                let  index = this._value.indexOf(data) 
+                // 4：如果存在删除，不存在返回false
+                if(index==-1){
+                    return false
+                }
+                this._value.splice(index,1);
+                --this.size;
+                return true
+
+            }
+            Set.prototype['has'] = function(data){
+                console.log('has run');
+                // 1:怎么获取 _value的值
+                // this._value
+                // 2：怎么验证data是否在_value中
+                return   this._value.indexOf(data) !== -1 
+            }
+            Set.prototype['forEach'] = function(cb){
+                console.log('FOR EACH run');
+                // 1:怎么获取_value
+                // this._value
+                // 2:怎么让cb执行多次
+                for(let i =0;i<this._value.length;i++){
+                    cb(this._value[i],this._value[i],this._value)
+                }
+                // 3：怎么讲_value 中key value 传递到cb函数中
+            }
+            Set.prototype['clear'] = function(){
+                console.log('clear run');
+                this._value = []
+                this.size = 0
+            }
+            global.Set = Set;
+        })(this)
+
+        let a = new  Set([1,2,2])
+        console.log(a);
+        // a.__proto__ === Set.prototype
+        // a.add a.delet 原型链上的属性可以被实例对象直接方式
+        a.add('aaa')
+        a.delet(1)
+        a.has('aaa')
+        // console.log(a.size); // 3
+        // a.add('aaa')
+        a.forEach((val,key,set)=>{
+
+        })
+
+        /**
+         * set 数据结构有哪些内容
+         * 1：有值 value 是一个数组
+         * 2：有长度 表示 value中有几个元素
+         * 有原型api
+         */ 
+</script>
+</body>
+</html>

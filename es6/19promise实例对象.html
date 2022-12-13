@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Promide 是实例对象上有哪些内容？
+         *  [[PromiseState]]    表示的promise实例的状态，
+         *  [[PromiseResult]]   表示promise实例的结果，作用：记录任务完成结果值。
+         * 
+         * promise的实例的状态值有哪些呢？
+         *  1：pending    表示任务正在进行中，
+         *  2：fulfilled  表示已接受，任务成功
+         *  3：rejected   表示已拒绝，任务失败
+         *  
+         * 如何修改[[PromiseState]] 的赋值。
+         *   1：执行Promise 的回参函数resolve reject
+         * 
+         * 
+         * 为什么[[PromiseResult]] 为undefined
+         *  因为任务进行中是没有结果的，只有任务完成才有结果
+         *  undefined表示没有结果：所以为undefined
+         * 
+         * 
+         * 怎么给[[PromiseResult]] 进行赋值？
+         *   第一种：resolve() 的实参，给[[PromiseResult]]的赋值
+         *
+         * 
+         * 如何读取 [[PromiseResult]] 值???
+         *   请看下节课内容，原型api
+         * 
+         * 如何获取属性的赋值？
+         * 注意：[[PromiseState]] 赋值读取没有任何意义，不读取了。
+         * 重点：[[PromiseResult]] 的赋值的读取。
+         */
+
+        //  注意：promises实例的状态，只能变更一次
+        let p = new Promise((resole,reject)=>{
+            /**
+             * resolve reject作用：修改promise实例的状态。
+             * resolve 将pending 变已接受
+             * reject  将pending 变为已决绝 报错
+             */
+            setTimeout(()=>{
+                resole('发送到发送大V')
+                // console.log('测试是结束语句句'); /** 测试resolve() 不能结束语句 */
+                // reject(); /* 验证promise实例的状态有且仅能变更一次 */
+                // console.log('reject走了吗哈哈哈');
+                console.log(p);
+            },3000)
+        })
+
+        console.log(p);
+        // console.log(p]]);
+       
+    
+    </script>
+    <script>
+        // 实例对象 就是普通对象
+        // let obj = new Object()
+        let person = {
+
+        }
+        /**
+         * 我们掌握实例对象哪些内容呢？
+         * 1：属性有哪些？   日志打印
+         * 2：每个有什么意义？
+         * 3：如果获取属性的赋值，如何修改属性的赋值？
+         * 4：原型上有哪些api
+         * 5: 每个api的作用是什么
+         * 
+         * 总结：只要在浏览器中以 [[xxxx]] 展示的属性都是特殊属性；都不能通过 对象.[[xxxx]] 读取值或者修改
+         *      一定是有特殊方式，读取或者修改属性的赋值，通常是有相关的api方法的
+         * 
+         */ 
+    </script>
+
+</body>
+</html>

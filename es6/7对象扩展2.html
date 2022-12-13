@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let obj = {
+        //     name:'aa',
+        //     age:112
+        // }
+
+        // // let arr = [];
+        // // for(let k in obj){
+        // //     arr.push(k)
+        // // }
+        // // console.log(arr);
+
+        // /***
+        //  * Object.key()
+        //  * 作用：获取对象下属性集合，返回数组 
+        //  */
+        // let keys  = Object.keys(obj);
+        // console.log(keys);
+
+
+        const proto = {
+            foo: 'hello'
+        };
+
+        const obj = {
+            foo: 'world',
+            find() {
+                /**
+                 * super 关键字
+                 * 指向原型对象
+                 * 注意：super 与函数执行无关；与函数写在哪里有关。
+                 *      super为 obj的原型
+                 * 注意：只能在对象的函数中使用 其他笛梵更实用会报错
+                 */ 
+                console.log(this);
+                return super.foo;
+            }
+        };
+        obj.__proto__ = proto
+        // console.log(obj.find());
+
+        let  obj2 = {
+            foo:"obj2"
+        }
+        obj2.find  = obj.find;
+        obj2.__proto__ = {
+            foo:"foo2"
+        }
+
+       console.log( obj2.find());
+
+       function bar(){
+        //    return super.a // bug
+       }
+       bar()
+
+
+       /**
+        * es6中super关键字的作用是什么？
+        * 1：对象中 super为原型对象
+        * 2：class 类中super 触发父类中的constructor函数
+        */ 
+    </script>
+</body>
+
+</html>

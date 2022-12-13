@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 网络请求，哪里的代码是异步的代码？
+         * 1：发请求：是同步的，
+         * 2：处理响应结果的函数是异步的。
+         * 
+         */
+
+         // 为什么会有promise
+        //  为了避免使用回调函数解决解决异步问题，层层嵌套情况，
+        //  es6中产生了promise，他的写法更加优化，将异步程序近乎与同步的写法。
+
+
+        var dynamicFunc = function (cb) {
+            console.log('dynamincFunc run');
+            setTimeout(function () {
+                cb();
+            }, 1000);
+        }
+        dynamicFunc(function () {
+            // 这里是异步执行的代码，是通过回调函数方式执行。
+            console.log(123)
+        });
+
+        /** 注意：不要认为所有的回调函数都是异步的。*/
+
+        // var  foo = function(cb){
+        //     cb()
+        // }
+        // foo(function(){
+        //     // 这个就是同步执行的回调函数
+        //     console.log('1111');
+        // })
+
+        // 注意：回调函数的嵌套，形成回调地狱。代码理解差；可读性差
+
+
+        // ------------回调地狱--------------
+
+        // let asyncFunc = function (cb) {
+        //     setTimeout(() => {
+        //         cb(function (cb) {
+        //             console.log(456);
+        //             setTimeout(() => {
+        //                 cb()
+        //             }, 1000);
+        //         })
+        //     }, 1000);
+        // }
+
+        // asyncFunc(function (cb) {
+        //     console.log(123);
+        //     setTimeout(() => {
+        //         cb(function(){
+        //             console.log(789);
+        //         })
+        //     }, 1000);
+        // })
+
+        // --------------以上代码可读性差j--------------------
+
+
+    </script>
+</body>
+
+</html>

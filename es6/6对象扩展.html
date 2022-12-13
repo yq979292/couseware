@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a = 123;
+        let b  = 34;
+        let key = 'bar'
+        let obj ={
+            // a:a,
+            // b:b,
+            // 当key值与变量名相同的时候可以简写
+            a,
+            b,
+            // ------对象简写------
+            // foo:function(){}
+            // 当key赋值为function可以使用es6语法，箭头函数不可以
+            foo(){
+
+            },
+            // ---------函数简写--------
+
+            // 当key值引用变量时候 [变量]
+            [key]:'属性应用变量',
+            // bar:'属性应用变量'
+            '[key]':'注意区别',
+
+            ['a'+'bc']:123
+        }
+        console.log(obj);
+
+
+        // obj.bar = 123;
+        obj['bar'] =123;
+    
+    </script>
+</body>
+</html>

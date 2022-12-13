@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 拦截判断运算符
+
+        let message = {
+            body:{
+                user:{
+                    firstname:'zhang'
+                },
+                foo(){
+                    console.log('foo run');
+                },
+                // bar:'不是函数' // bug
+                // bar(){
+                //     console.log('bar run');
+                // }
+            }
+        }
+
+        // message = undefined;
+         // ?.  链判断运算符,左边是否为对象，如果是null 或者undefined 直接返回undefined
+
+        // 如何message 对象，那么 messaeg.body.如果message不是对象，返回undefined
+        let res = message?.body;
+        console.log(res);
+
+        let res1 = message?.body?.user?.firstname; 
+        console.log(res1);
+
+        let res2 = message ?.['body'] ?.user?.['firstname']
+        console.log(res2);
+
+        message.body.foo()
+        let res3 = message.body.bar?.();
+        console.log(res3);
+        /*
+        ?.常见的语法：
+        obj?.prop // 对象属性是否存在
+        obj?.[expr] // 同上
+        func?.(...args) // 函数或对象方法是否存在
+  
+a?.b
+// 等同于
+a == null ? undefined : a.b
+
+a?.[x]
+// 等同于
+a == null ? undefined : a[x]
+
+a?.b()
+// 等同于
+a == null ? undefined : a.b()
+
+a?.()
+// 等同于
+a == null ? undefined : a()
+        */
+
+    // ------------------------------end -------------------------
+
+    // ---------------??--------------------------------------------
+
+    let response = '1231';
+    // 1：用于给某个个变量设置不同的初始值
+    // 2；解决兼容性写法。
+    const headerText = response || 'Hello, world!'; 
+    console.log(headerText);
+
+
+    // ?? 只有嘴边为null或者undefined 返回 右边的值，否者返回左边的值
+    // 注意：跟 || 区别，只要隐士转化为false 都返回右边值， NaN 0 '' false null undefined
+    let res5 = null ?? '123';
+    console.log(res5);
+    let res6 = undefined ?? '123';
+    console.log(res6);
+
+    let res7 = 123 ?? 'fasdf';
+    console.log(res7)
+    let res8 = 0 ?? 'fasdf';
+    console.log(res8)
+    let res9 = false ?? 'fasdf';
+    console.log(res9)
+
+    // ---------------end---------------------------
+
+    // ----------------逻辑运算符-----------------------
+    //  ||= &&= ??=
+    let x ;
+    let y = 2;
+
+    x ||= y;
+    // x || (x=y)
+    // x = x || 2;
+    console.log(x);
+    x &&=y
+// x && (x =y)
+    x ??=y;
+    // x ?? (x = y)
+    //  x = x ??y
+
+    </script>
+</body>
+</html>
