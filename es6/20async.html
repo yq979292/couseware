@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // promise 将异步问题，接近同步化的方式书写
+        // async await  将异步问题同步化了
+
+        // async 函数
+        // 1：默认返回值为promise实例对象
+        //    promiseState为已完成状态
+        async function foo(){
+            // return 的作用是给promise实例的[[PromiseResult]]赋值的
+            // 换句话：输出promise的任务结果
+            return 123
+        }
+        console.log(foo());
+        foo().then(res=>{
+            console.log('获取retrun的值j------>',res);
+        })
+
+        let bar = async ()=>{
+
+        }
+        let obj = {
+            b:'123',
+            async foo(){
+
+            },
+            a:"123",
+            bar: async ()=>{},
+            say: async function(){}
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 使用代理对象做；对象的属性的劫持。或者监听
+         * 
+         */ 
+        let p = new Proxy({}, {
+            /**
+             * get 在读取代理对象的属性赋值时，执行
+             */
+            get: function (target, propKey, receiver) {
+                console.log(`getting ${propKey}!`);
+                // return作用：输出属性的赋值
+                return Reflect.get(target, propKey, receiver);
+            },
+            /***
+             * 新增或者修改代理中属性的时候执行
+             */ 
+            set: function (target, propKey, value, receiver) {
+                /***
+                 * target 是代理对象下的target对象
+                 * propKey 修改的属性
+                 * value 新值
+                 * receiver  代理对象本身
+                 */ 
+                console.log(target,receiver);
+                console.log(`setting ${propKey}! ${value}`);
+                // 修改属性的赋值
+                return Reflect.set(target, propKey, value+1, receiver);
+            }
+        });
+        console.log(p);
+        p.count = 1;
+        console.log(p.count);
+
+
+        
+    </script>
+</body>
+
+</html>

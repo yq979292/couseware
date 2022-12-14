@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person {
+            constructor(a){
+                console.log('person run',a);
+                this.a = 123;
+            }
+            foo(){
+                console.log('foorun');
+            }
+        }
+
+        /**
+         * extends 类的继承
+         * 继承了 父类的实例属性和原型方法
+         * 实例属性作为子类实例对象的属性
+         * 原型方法作为原型链上的方法
+         */
+        class Child extends Person {
+            constructor(){
+                console.log('child run');
+                super(123) /* 触发父类中constructor,并传入实参  */
+                this.b = 234
+            }
+            bar(){
+                console.log('bar run');
+            }
+        }
+        let c = new Child()
+        c.foo()
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function bar(){
+            console.log('bar run');
+            return 123
+        }
+        async function foo(){
+            console.log('foo run');
+            /**
+             * await 只能在async函数中写。
+             * await 后需要的是promise实例对象
+             * await 作用：读取promise实例对象上的结果，换句话获取[[PromiseResult]] 的值
+             * await 作用：临时阻塞下面代码执行效果，需要等await 结束后才能继续执行下面代码
+             * await 作用：异步问题同步化
+             */
+            let res = await bar();
+            /**
+             * res = await promise实例bar
+             * res = promise实例bar.[[PromiseResult]]
+             * res = bar函数的return
+             * rst = 123
+             */
+            let r = await new Promise((res,rej)=>{
+                setTimeout(() => {
+                    console.log('cb run');
+                    res('5678')
+                }, 5000);
+            })
+            /**
+             * r = await promise实例new;
+             * r = promise实例new.[[PromiseResult]]
+             * r=  res的实参
+             * r = '5678'
+             */ 
+
+            console.log('测试await是否阻止下面代码执行的特点');
+            console.log(res);
+            console.log(r);
+        }
+        foo()
+    </script>
+</body>
+</html>

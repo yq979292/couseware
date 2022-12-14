@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建了一个类
+        class Person {
+           /**
+            * constructor 构造器函数
+            * 1：new 时候 执行
+            * 2：this 为 new 实例的对象
+            * 3：形参接收类的实参
+            * 用途：给实例对象添加静态属性。通过this
+            */ 
+            constructor(...rest){
+                console.log('new 执行');
+                // console.log(this);
+                console.log(rest);
+                this.name = rest[0];
+                this.age= rest[1]
+            }
+
+            // static 类的静态方法
+            static bar = function(){
+                console.log('类的静态方法');
+            }
+            // 给原型对象添加属性，实例访问的方法
+            foo(){
+                console.log('公共属性');
+            }
+            /**
+             * classL类中代码块语法注意事项
+             * 1：不能声明变量
+             * 2: 不能写 if for
+             */ 
+            // let a = 123
+            // 给实例对象添加属性
+            b = 123
+
+        }
+
+        let sun = new Person('孙',12)
+        sun.a= 123
+        Person.bar()
+        // sun.bar()
+        sun.foo()
+        // Person.foo()
+    </script>
+    <script>
+        // function person(){
+        //     this.name = '123'
+        // }
+        // person.bar = function (){
+        //     console.log('person 函数私有的静态属性');
+        // }
+        // person.prototype.foo = function(){
+        //     console.log('原型属性');
+        // }
+        // let z = new person();
+        // z.foo();
+        // // z.bar() // bar 是person 私有的属性,只能有person方式
+        // person.bar()
+
+        // Array.isArray([])
+        // Array.prototype.push()
+        // let arr= []
+        // arr.push()
+        // [].isArray() //bug
+    </script>
+</body>
+</html>
